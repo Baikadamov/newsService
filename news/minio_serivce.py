@@ -31,3 +31,9 @@ class MinioService:
             return response['Body'].read()
         except ClientError as e:
             raise Exception(f"Failed to download file: {e}")
+
+    def delete_file(self, unique_name):
+        try:
+            self.s3.delete_object(Bucket=self.bucket_name, Key=unique_name)
+        except Exception as e:
+            raise Exception(f"Failed to delete file: {e}")

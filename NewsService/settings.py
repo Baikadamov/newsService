@@ -25,7 +25,16 @@ SECRET_KEY = 'django-insecure-01z5-_!)oqy0y7%&4kx1$k#ti^j^idau!n%gqyijp1b#e*2eqj
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    '127.0.0.1',
+    '127.0.0.1:4200',
+    '127.0.0.1:8000',
+]
+
+CORS_ALLOWED_ORIGINS = [
+    'http://localhost:4200',  # Angular приложение
+]
+CORS_ALLOW_ALL_ORIGINS = True
 
 MINIO_STORAGE_ENDPOINT = 'localhost:9000'
 MINIO_STORAGE_ACCESS_KEY = 'minioadmin'
@@ -33,7 +42,6 @@ MINIO_STORAGE_SECRET_KEY = 'minioadmin'
 MINIO_STORAGE_USE_HTTPS = False
 MINIO_STORAGE_BUCKET_NAME = 'images'
 DATA_UPLOAD_MAX_MEMORY_SIZE = 5242880  # 5 MB
-
 
 # Application definition
 
@@ -46,9 +54,11 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'news.apps.NewsConfig',
+    'corsheaders'
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -88,6 +98,23 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+
+CACHES = {
+    'default': {
+        'BACKEND': 'django_redis.cache.RedisCache',
+        'LOCATION': 'redis://127.0.0.1:6379/1',  # Используйте 127.0.0.1 для подключения к Redis
+        'OPTIONS': {
+            'CLIENT_CLASS': 'django_redis.client.DefaultClient',
+        },
+    }
+}
+
+
+REDIS_HOST = '127.0.0.1'  # Имя контейнера Redis
+REDIS_PORT = 6379
+REDIS_DB = 0
+
+
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
