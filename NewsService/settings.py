@@ -27,17 +27,13 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-# Настройки MinIO
-AWS_ACCESS_KEY_ID = 'minioadmin'  # Ключ доступа MinIO
-AWS_SECRET_ACCESS_KEY = 'minioadmin'  # Секретный ключ MinIO
-AWS_STORAGE_BUCKET_NAME = 'news-images'  # Название бакета
-AWS_S3_ENDPOINT_URL = 'http://localhost:9000'  # URL MinIO
+MINIO_STORAGE_ENDPOINT = 'localhost:9000'
+MINIO_STORAGE_ACCESS_KEY = 'minioadmin'
+MINIO_STORAGE_SECRET_KEY = 'minioadmin'
+MINIO_STORAGE_USE_HTTPS = False
+MINIO_STORAGE_BUCKET_NAME = 'images'
+DATA_UPLOAD_MAX_MEMORY_SIZE = 5242880  # 5 MB
 
-# Настройки хранилища
-DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
-
-# URL для медиафайлов
-MEDIA_URL = f'{AWS_S3_ENDPOINT_URL}/{AWS_STORAGE_BUCKET_NAME}/'
 
 # Application definition
 
