@@ -29,12 +29,12 @@ ALLOWED_HOSTS = [
     '127.0.0.1',
     '127.0.0.1:4200',
     '127.0.0.1:8000',
+    '*'
 ]
 
-CORS_ALLOWED_ORIGINS = [
-    'http://localhost:4200',  # Angular приложение
-]
+
 CORS_ALLOW_ALL_ORIGINS = True
+
 
 MINIO_STORAGE_ENDPOINT = 'localhost:9000'
 MINIO_STORAGE_ACCESS_KEY = 'minioadmin'
